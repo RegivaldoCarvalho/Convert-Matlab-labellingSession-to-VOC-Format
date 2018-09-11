@@ -10,24 +10,24 @@ len = size(labelingSession.ImageSet.ImageStruct,2);
 
 for i=1:len
     
-    path = labelingSession.ImageSet.ImageStruct(i).imageFilename; % resgata o endereço completo da foto
+    path = labelingSession.ImageSet.ImageStruct(i).imageFilename; % resgata o endereÃ§o completo da foto
     VOC.annotation.path.Text = path;
-    foto = labelingSession.ImageSet.ImageStruct(i).ImageLabel; % nome da foto
-    VOC.annotation.filename.Text = foto; 
-    
     % Separa o texto
     expression = '\\';
-    splitStr = regexp(path,expression,'split');
-    % Localiza o diretório
+    splitStr = regexp(path,expression,'split');    
+    % Nome da foto
+    foto = string(splitStr(size(splitStr,2)));;
+    VOC.annotation.filename.Text = foto; 
+    % Localiza o diretÃ³rio
     folder = string(splitStr(size(splitStr,2)-1));
-    VOC.annotation.folder.Text = folder  % Nome do diretório da foto
+    VOC.annotation.folder.Text = folder  % Nome do diretÃ³rio da foto
     VOC.annotation.source.database.Text = Fonte; % Define a Fonte dos dados
-    % Características da Imagem
+    % CaracterÃ­sticas da Imagem
     [height, width, depth] = size(imread(path));
     VOC.annotation.size.width.Text = num2str(width);
     VOC.annotation.size.height.Text = num2str(height);
     VOC.annotation.size.depth.Text = num2str(depth);
-    % Segmentação
+    % SegmentaÃ§Ã£o
     VOC.annotation.segmented.Text = '0'
     
     
@@ -41,7 +41,7 @@ for i=1:len
         VOC.annotation.object{1, j}.pose.Text = 'Unspecified'; 
         VOC.annotation.object{1, j}.truncated.Text = '0';
         VOC.annotation.object{1, j}.difficult.Text = '0';
-        % Posição da BoundBox  [x,y,width, height]
+        % PosiÃ§Ã£o da BoundBox  [x,y,width, height]
         xmin = labelingSession.ImageSet.ImageStruct(i).objectBoundingBoxes(j); 
         ymin = labelingSession.ImageSet.ImageStruct(i).objectBoundingBoxes(j+ number_bboxes);
         xmax = xmin + labelingSession.ImageSet.ImageStruct(i).objectBoundingBoxes(j+(2*number_bboxes));
