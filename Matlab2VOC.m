@@ -1,9 +1,9 @@
 % Convert Matlab Lalbeling Session to a VOC Label
 
 % Load labelingSesssion
-load('D:\Python\Power_Grid_Inspection\labelingSessions\Isolador_Pilar_02_09_2018.mat')
+load('D:\Python\Rollers\labelingSessions\Img_nomeadas_acada10frames.mat')
 % Defina a fote dos dados
-Fonte = 'Power_Line_Vale'; 
+Fonte = 'Rollers'; 
 
 len = size(labelingSession.ImageSet.ImageStruct,2);
 
@@ -36,7 +36,9 @@ for i=1:len
     for j=1:number_bboxes    
               
         % Objetos - Boundboxes
-        VOC.annotation.object{1, j}.name.Text = labelingSession.CategorySet.CategoryStruct.categoryName; % Nome da Tag
+            %Nome da Tag
+        categoryID = labelingSession.ImageSet.ImageStruct(i).catID(j);
+        VOC.annotation.object{1, j}.name.Text = labelingSession.CategorySet.CategoryStruct(categoryID).categoryName;
         VOC.annotation.object{1, j}.pose.Text = 'Unspecified'; 
         VOC.annotation.object{1, j}.truncated.Text = '0';
         VOC.annotation.object{1, j}.difficult.Text = '0';
