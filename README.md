@@ -4,6 +4,9 @@ Convert a labellingSession from Matlab to a VOC dataset in an XML format
 We are using the function struct2xml version 1.7.0.0 (3 KB) by Wouter Falkena.
 https://www.mathworks.com/matlabcentral/fileexchange/28639-struct2xml?s_tid=srchtitle
 
+Matlab2VOC.m has been modifed to work with the newer ground truth labeler.
+Export the variable name as gTruth, export format as groundTruth.
+
 # How to do 
 
 The entire process is too simple and only need three steps.
@@ -17,18 +20,15 @@ Put in the same folder the files below:
 ```
 ## Step 2
 
-On Matlab editor open the script Matlab2VOC.m and set the path to you labellingSession, like the exemple below: 
+On Matlab editor open the script Matlab2VOC.m and set the path to you ground truth labeling session, like the example below: 
 
 ```bash
-% Load labelingSesssion
-load('D:\Python\Power_Grid_Inspection\labelingSessions\Isolador_Pilar_01_09_2018.mat')
+% Load ground truth from labeling session
+% It is assumed the file is called gTruth
+load('C:\Users\Andy\OneDrive\Desktop\Coding\Matlab\Labelling\cat.mat')
 ```
 
 ## Step 3
 
-Copy the XML files generated to the same folder of your images.
-
-Just that, you are ready to use your new VOC dataset. 
-
-Thank you, for your attention. 
+The XML files are generated in the same folder as the image folder. 
 
